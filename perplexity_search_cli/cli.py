@@ -10,6 +10,7 @@ def main():
     parser.add_argument('-p', '--prompt', help='Prompt to send to Perplexity API')
     parser.add_argument('-k', '--api-key', help='Perplexity API key (or set PPLX_API_KEY env var)')
     parser.add_argument('-o', '--output', help='Path to save full JSON response')
+    parser.add_argument('--params', help='Additional API parameters as JSON string')
     args = parser.parse_args()
 
     api_key = args.api_key or os.getenv('PPLX_API_KEY', None)
@@ -34,6 +35,7 @@ def main():
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
+    # Base payload
     payload = {
         "model": "sonar",
         "messages": [
@@ -47,6 +49,15 @@ def main():
             }
         ]
     }
+
+    # Merge additional parameters if provided
+    if args.params:
+        try:
+            additional_params = json.loads(args.params)
+            payload.update(additional_params)
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON parameters: {e}", file=sys.stderr)
+            sys.exit(1)
 
     try:
         response = requests.post(url, json=payload, headers=headers)

@@ -12,33 +12,46 @@ A command line interface for interacting with the Perplexity AI API.
 
 ## Installation
 
-1. Clone this repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### From source
+```bash
+git clone https://github.com/yourusername/perplexity-search-cli.git
+cd perplexity-search-cli
+pip install .
+```
+
+### Direct install
+```bash
+pip install git+https://github.com/yourusername/perplexity-search-cli.git
+```
+
+### Development install
+```bash
+git clone https://github.com/yourusername/perplexity-search-cli.git
+cd perplexity-search-cli
+pip install -e .
+```
 
 ## Usage
 
 Basic query:
 ```bash
-python3 perplexity_cli.py -p "Your question" -k YOUR_API_KEY
+perplexity-search-cli -p "Your question" -k YOUR_API_KEY
 ```
 
 Using environment variable:
 ```bash
 export PPLX_API_KEY=YOUR_API_KEY
-python3 perplexity_cli.py -p "Your question"
+perplexity-search-cli -p "Your question"
 ```
 
 Pipe input from stdin:
 ```bash
-echo "Your question" | python3 perplexity_cli.py -k YOUR_API_KEY
+echo "Your question" | perplexity-search-cli -k YOUR_API_KEY
 ```
 
 Save full JSON response:
 ```bash
-python3 perplexity_cli.py -p "Your question" -k YOUR_API_KEY -o response.json
+perplexity-search-cli -p "Your question" -k YOUR_API_KEY -o response.json
 ```
 
 ## Options
@@ -51,6 +64,14 @@ python3 perplexity_cli.py -p "Your question" -k YOUR_API_KEY -o response.json
                         Perplexity API key (or set PPLX_API_KEY env var)
   -o OUTPUT, --output OUTPUT
                         Path to save full JSON response
+  --params PARAMS       Additional API parameters as JSON string
+```
+
+## Example with Additional Parameters
+
+```bash
+perplexity-search-cli -p "Your question" -k YOUR_API_KEY \
+  --params '{"temperature": 0.7, "max_tokens": 100}'
 ```
 
 ## Requirements
