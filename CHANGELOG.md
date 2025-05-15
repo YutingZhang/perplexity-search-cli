@@ -1,6 +1,12 @@
 # Changelog
 
-## v1.0.5 - Current Release (2025-05-15)
+## v1.0.6 - Current Release (2025-05-15)
+
+### Features
+- Updated version to v1.0.6
+- Fixed empty prompt handling
+
+## v1.0.5 - Previous Release (2025-05-15)
 
 ### Features
 - Updated version to v1.0.5
