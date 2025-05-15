@@ -6,6 +6,7 @@ import sys
 import argparse
 import requests
 import json
+import datetime
 
 def main():
     parser = argparse.ArgumentParser(description='Perplexity API CLI')
@@ -27,7 +28,12 @@ def main():
     prompt = args.prompt
     if not prompt:
         # Read from stdin if no prompt argument
+        if sys.stdin.isatty():
+            print("\n=== PERPLEXITY CLI ===", file=sys.stderr)
+            print("Please enter your query (press Ctrl+D when done):", file=sys.stderr)
         prompt = sys.stdin.read().strip()
+        if sys.stdin.isatty():
+            print("\n=== Processing your query... ===\n", file=sys.stderr)
         if not prompt:
             print("Error: No prompt provided", file=sys.stderr)
             sys.exit(1)
