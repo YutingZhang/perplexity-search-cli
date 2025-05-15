@@ -1,6 +1,12 @@
 # Changelog
 
-## v1.0.1 - Current Release (2025-05-15)
+## v1.0.2 - Current Release (2025-05-15)
+
+### Features
+- Updated version to v1.0.2
+- Improved documentation
+
+## v1.0.1 - Previous Release (2025-05-15)
 
 ### Features
 - Initial release of Perplexity Search CLI
@@ -8,6 +14,7 @@
 - Supports API queries via command line or stdin
 - Configurable through environment variables or arguments
 - Automatic PyPI publishing via GitHub Actions
+- Package now available on PyPI (`pip install perplexity-search-cli`)
 
 ### Infrastructure
 - GitHub Actions workflow for automated releases
