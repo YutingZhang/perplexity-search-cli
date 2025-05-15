@@ -1,9 +1,16 @@
 # Changelog
 
-## v1.0.4 - Current Release (2025-05-15)
+## v1.0.5 - Current Release (2025-05-15)
+
+### Features
+- Updated version to v1.0.5
+
+## v1.0.4 - Previous Release (2025-05-15)
 
 ### Features
 - Updated version to v1.0.4
+- Added interactive terminal status messages for stdin input
+- Improved empty input handling (clean exit)
 
 ## v1.0.3 - Previous Release (2025-05-15)
 
