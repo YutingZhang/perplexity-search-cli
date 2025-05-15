@@ -12,16 +12,16 @@ A command line interface for interacting with the Perplexity AI API.
 
 ## Installation
 
+Install directly from PyPI:
+```bash
+pip install perplexity-search-cli
+```
+
 ### From source
 ```bash
 git clone https://github.com/yourusername/perplexity-search-cli.git
 cd perplexity-search-cli
 pip install .
-```
-
-### Direct install
-```bash
-pip install git+https://github.com/yourusername/perplexity-search-cli.git
 ```
 
 ### Development install
