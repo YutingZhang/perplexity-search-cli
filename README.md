@@ -78,3 +78,17 @@ perplexity-search-cli -p "Your question" -k YOUR_API_KEY \
 
 - Python 3.6+
 - requests package
+
+## Publishing New Versions
+
+1. Update version in pyproject.toml
+2. Commit changes
+3. Create a new git tag:
+```bash
+git tag vX.Y.Z  # match version in pyproject.toml
+git push origin vX.Y.Z
+```
+
+The GitHub Action will automatically:
+- Build the package
+- Publish to PyPI when tags are pushed
