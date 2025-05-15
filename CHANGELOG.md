@@ -1,9 +1,15 @@
 # Changelog
 
-## v1.0.3 - Current Release (2025-05-15)
+## v1.0.4 - Current Release (2025-05-15)
+
+### Features
+- Updated version to v1.0.4
+
+## v1.0.3 - Previous Release (2025-05-15)
 
 ### Features
 - Updated version to v1.0.3
+- Added interactive terminal status messages for stdin input
 
 ## v1.0.2 - Previous Release (2025-05-15)
 
