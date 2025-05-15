@@ -3,11 +3,13 @@ import os
 import sys
 import argparse
 import requests
+import json
 
 def main():
     parser = argparse.ArgumentParser(description='Perplexity API CLI')
     parser.add_argument('-p', '--prompt', help='Prompt to send to Perplexity API')
     parser.add_argument('-k', '--api-key', help='Perplexity API key (or set PPLX_API_KEY env var)')
+    parser.add_argument('-o', '--output', help='Path to save full JSON response')
     args = parser.parse_args()
 
     api_key = args.api_key or os.getenv('PPLX_API_KEY', None)
@@ -50,6 +52,16 @@ def main():
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         result = response.json()
+        
+        # Save full JSON response if output path specified
+        if args.output:
+            try:
+                with open(args.output, 'w') as f:
+                    json.dump(result, f, indent=2)
+            except Exception as e:
+                print(f"Error saving output file: {e}", file=sys.stderr)
+                sys.exit(1)
+                
         print(result.get('choices', [{}])[0].get('message', {}).get('content', ''))
     except requests.exceptions.RequestException as e:
         print(f"API request failed: {e}", file=sys.stderr)
