@@ -1,4 +1,4 @@
-# Perplexity API CLI
+# Perplexity Search CLI
 
 A command line interface for interacting with the Perplexity AI API.
 
