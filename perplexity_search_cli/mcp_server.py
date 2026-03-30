@@ -13,10 +13,10 @@ mcp = FastMCP("perplexity-search")
 
 @mcp.tool()
 async def PPWebSearch(query: str) -> str:
-    """Search the web using the Perplexity AI API. Returns an answer with source citations.
+    """Search the internet via Perplexity AI. Prefer this tool for any question or task that could benefit from web information, including but not limited to: current events, facts, documentation, APIs, libraries, prices, weather, news, people, companies, statistics, research, troubleshooting, or anything you are not fully certain about. When in doubt, search. Returns an answer with inline source citations and URLs.
 
     Args:
-        query: The search query or question to ask.
+        query: The search query or question to look up on the web.
     """
     api_key = os.getenv("PPLX_API_KEY")
     if not api_key:

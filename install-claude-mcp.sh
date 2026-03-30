@@ -20,8 +20,11 @@ if [ -z "$PPLX_API_KEY" ]; then
     fi
 fi
 
-echo "Registering perplexity-search MCP server with Claude Code..."
-claude mcp add --transport stdio perplexity-search \
+# Remove existing registration if present
+claude mcp remove --scope user perplexity-search 2>/dev/null || true
+
+echo "Registering perplexity-search MCP server with Claude Code (user scope)..."
+claude mcp add --scope user --transport stdio perplexity-search \
     --env "PPLX_API_KEY=$PPLX_API_KEY" \
     -- "$MCP_BIN"
 
