@@ -14,7 +14,7 @@ def main():
     parser.add_argument('-p', '--prompt', help='Prompt to send to Perplexity API')
     parser.add_argument('-k', '--api-key', help='Perplexity API key (or set PPLX_API_KEY env var)')
     parser.add_argument('-o', '--output', help='Path to save full JSON response')
-    parser.add_argument('--no-citations', action='store_true', help='Disable printing source citations')
+    parser.add_argument('-n', '--no-citations', action='store_true', help='Disable printing source citations')
     parser.add_argument('--params', help='Additional API parameters as JSON string')
     args = parser.parse_args()
 
