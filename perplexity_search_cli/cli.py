@@ -7,12 +7,14 @@ import argparse
 import requests
 import json
 import datetime
+import re
 
 def main():
     parser = argparse.ArgumentParser(description='Perplexity API CLI')
     parser.add_argument('-p', '--prompt', help='Prompt to send to Perplexity API')
     parser.add_argument('-k', '--api-key', help='Perplexity API key (or set PPLX_API_KEY env var)')
     parser.add_argument('-o', '--output', help='Path to save full JSON response')
+    parser.add_argument('--no-citations', action='store_true', help='Disable printing source citations')
     parser.add_argument('--params', help='Additional API parameters as JSON string')
     args = parser.parse_args()
 
@@ -83,7 +85,29 @@ def main():
                 print(f"Error saving output file: {e}", file=sys.stderr)
                 sys.exit(1)
                 
-        print(result.get('choices', [{}])[0].get('message', {}).get('content', ''))
+        content = result.get('choices', [{}])[0].get('message', {}).get('content', '')
+        citations = result.get('citations', []) or []
+
+        if args.no_citations or not citations:
+            # Strip inline reference markers when not showing citations
+            if not citations or args.no_citations:
+                content = re.sub(r'\[(\d+)\]', '', content)
+            print(content)
+        else:
+            # Find which citation indices are actually referenced in the content
+            referenced = set(int(m) for m in re.findall(r'\[(\d+)\]', content))
+            # Filter to only citations that exist and are referenced
+            used_citations = []
+            for idx in sorted(referenced):
+                if 1 <= idx <= len(citations):
+                    used_citations.append((idx, citations[idx - 1]))
+
+            print(content)
+
+            if used_citations:
+                print("\nSources:")
+                for idx, url in used_citations:
+                    print(f"  [{idx}] {url}")
     except requests.exceptions.RequestException as e:
         print(f"API request failed: {e}", file=sys.stderr)
         sys.exit(1)
