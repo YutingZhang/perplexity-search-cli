@@ -10,7 +10,7 @@ A command line interface for interacting with the Perplexity AI API.
 - Source citations with inline cross-references (enabled by default)
 - Optionally save full JSON responses to file
 - Clean, formatted output
-- Claude Code MCP integration (PPWebSearch tool)
+- Claude Code MCP integration (`PPWebSearch` tool, one-command setup)
 
 ## Installation
 
@@ -114,15 +114,10 @@ pip install 'perplexity-search-cli[mcp]'
 
 ```bash
 export PPLX_API_KEY=YOUR_API_KEY
-./install-claude-mcp.sh
+perplexity-install-claude-mcp
 ```
 
-Or register manually:
-```bash
-claude mcp add --transport stdio perplexity-search \
-  --env PPLX_API_KEY=YOUR_API_KEY \
-  -- perplexity-mcp-server
-```
+This registers the MCP server globally for the current user. Re-run any time to update the registration.
 
 Verify with `claude mcp list` or `/mcp` inside Claude Code.
 

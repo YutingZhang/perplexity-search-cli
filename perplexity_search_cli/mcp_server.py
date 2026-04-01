@@ -60,5 +60,53 @@ def main():
     mcp.run(transport="stdio")
 
 
+def install_claude_mcp():
+    import shutil
+    import subprocess
+    import getpass
+
+    mcp_bin = shutil.which("perplexity-mcp-server")
+    if not mcp_bin:
+        print("Error: perplexity-mcp-server not found.", file=sys.stderr)
+        print("Install it first:  pip install 'perplexity-search-cli[mcp]'", file=sys.stderr)
+        sys.exit(1)
+
+    claude_bin = shutil.which("claude")
+    if not claude_bin:
+        print("Error: claude CLI not found. Please install Claude Code first.", file=sys.stderr)
+        sys.exit(1)
+
+    api_key = os.getenv("PPLX_API_KEY")
+    if not api_key:
+        api_key = getpass.getpass("Enter your Perplexity API key: ").strip()
+        if not api_key:
+            print("Error: API key is required.", file=sys.stderr)
+            sys.exit(1)
+
+    # Remove existing registration if present
+    subprocess.run(
+        [claude_bin, "mcp", "remove", "--scope", "user", "perplexity-search"],
+        capture_output=True,
+    )
+
+    print("Registering perplexity-search MCP server with Claude Code (user scope)...")
+    result = subprocess.run(
+        [
+            claude_bin, "mcp", "add",
+            "--scope", "user",
+            "--transport", "stdio",
+            "perplexity-search",
+            "--env", f"PPLX_API_KEY={api_key}",
+            "--", mcp_bin,
+        ]
+    )
+    if result.returncode != 0:
+        print("Error: failed to register MCP server.", file=sys.stderr)
+        sys.exit(1)
+
+    print("Done! The PPWebSearch tool is now available in Claude Code.")
+    print("Run 'claude mcp list' to verify.")
+
+
 if __name__ == "__main__":
     main()
