@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "perplexity-search-cli"
-version = "1.0.10"
+version = "1.0.11"
 description = "Command line interface for Perplexity AI API"
 authors = [
     {name = "Yuting Zhang"},
@@ -17,10 +17,8 @@ classifiers = [
 ]
 dependencies = [
     "requests>=2.31.0",
+    "mcp[cli]>=1.0.0",
 ]
-
-[project.optional-dependencies]
-mcp = ["mcp[cli]>=1.0.0"]
 
 [project.scripts]
 perplexity-search-cli = "perplexity_search_cli.cli:main"

@@ -19,24 +19,20 @@ Install directly from PyPI:
 pip install perplexity-search-cli
 ```
 
-With MCP server support (for Claude Code integration):
-```bash
-pip install 'perplexity-search-cli[mcp]'
-```
+After installation, you will see instructions to register it as a Claude Code MCP server.
 
 ### From source
 ```bash
 git clone https://github.com/yourusername/perplexity-search-cli.git
 cd perplexity-search-cli
-pip install .            # CLI only
-pip install '.[mcp]'    # with MCP server support
+pip install .
 ```
 
 ### Development install
 ```bash
 git clone https://github.com/yourusername/perplexity-search-cli.git
 cd perplexity-search-cli
-pip install -e '.[mcp]'
+pip install -e .
 ```
 
 ## Usage
@@ -104,12 +100,6 @@ perplexity-search-cli -p "Your question" -k YOUR_API_KEY \
 
 This package can be registered as a Claude Code MCP server, exposing a `PPWebSearch` tool.
 
-### Install with MCP support
-
-```bash
-pip install 'perplexity-search-cli[mcp]'
-```
-
 ### Register with Claude Code
 
 ```bash
@@ -125,7 +115,7 @@ Verify with `claude mcp list` or `/mcp` inside Claude Code.
 
 - Python 3.6+
 - requests
-- mcp[cli] (optional, for Claude Code integration)
+- mcp[cli]
 
 ## Publishing New Versions
 
